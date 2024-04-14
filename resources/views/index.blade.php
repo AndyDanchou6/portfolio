@@ -165,7 +165,7 @@
                             <h5>Project Name: </h5>
                             <p>${idMatch['projectName']}</p>
                             <h5>Category: </h5>
-                            <p>${idMatch['description']}</p>
+                            <p>${idMatch['category']}</p>
                             <h5>Client: </h5>
                             <p>${idMatch['client']}</p>
                             <h5>Project Link: </h5>
