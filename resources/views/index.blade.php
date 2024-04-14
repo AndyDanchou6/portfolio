@@ -41,15 +41,15 @@
     <div class="modal-dialog modal-dialog-scrollable">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">PortFolio Detail</h5>
+                <h5 class="modal-title">Project Details</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body" id="modalContent">
-                <div class="row">
-                    <div>
-                        <img src="" alt="">
+                <div>
+                    <div id="imageWrapper">
+
                     </div>
-                    <div>
+                    <div id="textDetails">
 
                     </div>
                 </div>
@@ -118,13 +118,13 @@
                     }
 
                     var item = data[i];
-                    var imageUrl = 'storage/' + item.picture;
+                    var imagePath = 'storage/' + item.picture;
                     const portfolioContents = `
                     <div class="col-lg-4 col-md-6 portfolio-item filter-app">
                         <div class="portfolio-wrap">
-                            <img src="${imageUrl}" class="img-fluid img-responsive" alt="Photo">
+                            <img src="${imagePath}" class="img-fluid img-responsive" alt="Photo">
                             <div class="portfolio-links">
-                                <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalDialogScrollable" data-contentId="${item.id}">More Details</button>
+                                <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalDialogScrollable" data-content-id="${item.id}">More Details</button>
                             </div>
                         </div>
                     </div>
@@ -136,22 +136,61 @@
                     //console.log(item.id)
                 }
 
+                // Contents Modal
+                const portfolioItem = document.getElementById('portfolioContainer')
+                portfolioItem.addEventListener('click', function() {
+                    if (event.target.matches('.portfolio-links button')) {
+                        const itemId = event.target.dataset.contentId;
+
+                        var idMatch;
+
+                        for (let i = 0; i < data.length; i++) {
+                            if (data[i].id == itemId) {
+                                idMatch = data[i];
+                                break;
+                            }
+                        }
+
+                        var modalImgWrap = document.getElementById('imageWrapper');
+                        var contentImgPath = 'storage/' + idMatch['picture'];
+                        var modalContentImg = `
+                            <img class="img-fluid img-responsive" src="${contentImgPath}" alt="Photo">
+                        `;
+                        modalImgWrap.innerHTML = modalContentImg;
+
+                        var modalDetailsWrap = document.getElementById('textDetails');
+                        var contentTextDetail = `
+                            <h5>Description: </h5>
+                            <p>${idMatch['description']}</p>
+                            <h5>Project Name: </h5>
+                            <p>${idMatch['projectName']}</p>
+                            <h5>Category: </h5>
+                            <p>${idMatch['description']}</p>
+                            <h5>Client: </h5>
+                            <p>${idMatch['client']}</p>
+                            <h5>Project Link: </h5>
+                            <p>${idMatch['url']}</p>
+                            <h5>Date Started: </h5>
+                            <p>${idMatch['startDate']}</p>
+                            <h5>Completion: </h5>
+                            <p>${idMatch['completion']}</p>
+                            <h5>Date Finished: </h5>
+                            <p>${idMatch['completionDate']}</p>
+                        `;
+
+                        modalDetailsWrap.innerHTML = contentTextDetail;
+                        // console.log(modalContentImg);
+                        // ToDo : populate modal with data
+                    }
+                });
                 //console.log(item.picture);
             })
             .catch(error => {
                 console.error('Error fetching projects data:', error);
             });
-        
-            // Contents Modal
-        // const portfolioItem = document.getElementById('portfolioContainer')
-        // portfolioItem.addEventListener('click', function() {
-        //     if (event.target.matches('.portfolio-links button')) {
-        //         const itemId = event.target.dataset.contentId;
-        //         console.log(itemId);
-        //     }
-        // });
 
-        console.log(portfolioItem);
+
+
         // Backgrounds
         fetch(`/api/backgrounds`)
             .then(response => response.json())
@@ -200,7 +239,7 @@
                     if (data[i].role == 0) {
 
                         let testimony = data[i];
-                        let imageUrl = 'storage/' + testimony.profilePic;
+                        let imagePath = 'storage/' + testimony.profilePic;
                         const testimonyContents = `
                             <div class="testimonial-item" data-aos="fade-up" data-aos-delay="${delay}">
                                 <p>
@@ -208,7 +247,7 @@
                                     ${testimony.message}
                                     <i class="bx bxs-quote-alt-right quote-icon-right"></i>
                                 </p>
-                                <img src="${imageUrl}" class="testimonial-img" alt="">
+                                <img src="${imagePath}" class="testimonial-img" alt="">
                                 <h3>${testimony.fullname}</h3>
                                 <h4>${testimony.job}</h4>
                             </div>

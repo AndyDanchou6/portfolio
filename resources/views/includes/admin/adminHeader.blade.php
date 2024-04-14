@@ -92,7 +92,7 @@
               <hr class="dropdown-divider">
             </li>
 
-            
+
             <li class="dropdown-footer">
               <a href="#">Show all messages</a>
             </li>
@@ -118,7 +118,7 @@
             </li>
 
             <li>
-              <a class="dropdown-item d-flex align-items-center" href="#">
+              <a class="dropdown-item d-flex align-items-center" href="{{ route('profile') }}">
                 <i class="bi bi-person"></i>
                 <span>My Profile</span>
               </a>
@@ -144,18 +144,18 @@
               </a>
             </li>
             <li> -->
-              <hr class="dropdown-divider">
-            </li>
+            <hr class="dropdown-divider">
+        </li>
 
-            <li>
-              <a class="dropdown-item d-flex align-items-center" href="{{ route('logout') }}">
-                <i class="bi bi-box-arrow-right"></i>
-                <span>Sign Out</span>
-              </a>
-            </li>
+        <li>
+          <a class="dropdown-item d-flex align-items-center" href="{{ route('logout') }}">
+            <i class="bi bi-box-arrow-right"></i>
+            <span>Sign Out</span>
+          </a>
+        </li>
 
-          </ul><!-- End Profile Dropdown Items -->
-        </li><!-- End Profile Nav -->
+      </ul><!-- End Profile Dropdown Items -->
+      </li><!-- End Profile Nav -->
 
       </ul>
     </nav><!-- End Icons Navigation -->

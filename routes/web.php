@@ -6,7 +6,7 @@ use App\Http\Controllers\BackgroundsController;
 use App\Http\Controllers\PeopleController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\AboutController;
-use App\Models\ProjectsModel;
+use App\Http\Controllers\ViewController;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,7 +23,7 @@ Route::get('/', function () {
     return view('index');
 })->name('index');
 
-Route::get('/admin', function () {
+Route::get('/login', function () {
     return view('login');
 })->name('login');
 
@@ -57,11 +57,13 @@ Route::middleware(['auth'])->group(function () {
         return view('adminPanel/adminMessages');
     })->name('messages');
 
-    Route::get('/profile', function () {
-        return view('adminPanel.adminProfile');
-    })->name('profile');
+    Route::get('/profile', [ViewController::class, 'adminProfile'])->name('profile');
+    Route::post('/profile/update', [AboutController::class, 'update'])->name('profile.update');
+    // Route::get('/profile', function () {
+    //     return view('adminPanel.adminProfile');
+    // })->name('profile');
 
-    
+
 
     Route::post('/newProjects', [ProjectsController::class, 'store'])->name('projects.store');
     Route::patch('/api/updateProjects/{id}', [ProjectsController::class, 'update'])->name('projects.update');

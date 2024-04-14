@@ -231,7 +231,7 @@
     const tableBody = document.getElementById('table_body');
 
     tableBody.addEventListener('click', function(event) {
-        
+
         if (event.target.classList.contains('view-icon') || event.target.classList.contains('edit-icon')) {
 
             const projectId = event.target.dataset.projectId;
@@ -348,7 +348,7 @@
                                     </div>
                                     <div class="text-center">
                                         <button type="submit" class="btn btn-primary">Submit</button>
-                                        <button type="submit" class="btn btn-secondary bg-danger"><a class="bg-danger"href="${projectDeleteUrl}">Delete</a></button>
+                                        <button type="submit" class="btn btn-danger"><a href="${projectDeleteUrl}">Delete</a></button>
                                     </div>
                                 </form>
                             </div>
